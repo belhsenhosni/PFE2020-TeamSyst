@@ -36,8 +36,6 @@ export const signup = (firstName,lastName,gender,email, password,number) => {
         })
       }
     );
-
-
     
     if (!response.ok) {
       const errorResData = await response.json();
@@ -146,7 +144,6 @@ const setLogoutTimer = expirationTime => {
 //     })
 //   );
 // };
-
 
 const saveDataToStorage = (token, userId) => {
   AsyncStorage.setItem(

@@ -20,7 +20,7 @@ export default (state = initialState, action) => {
         userId: action.userId
       };*/
     default:
-      
+     
       return state;
   }
 };
