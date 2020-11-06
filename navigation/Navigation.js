@@ -3,7 +3,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { Platform, SafeAreaView, Button, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer'; 
+import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer';
 import Colors from '../constants/Colors';
 import { useDispatch } from 'react-redux';
 import HomeScreen from '../screens/HomeScreen';
@@ -12,6 +12,8 @@ import StartupScreen from '../screens/StartupScreen';
 import TestScreen from '../screens/TestScreen';
 import * as authActions from '../store/actions/auth';
 import SignupScreen from '../screens/SignupScreen';
+import SplashScreen from '../screens/SplashScreen';
+
 
 
 
@@ -23,7 +25,7 @@ const defaultNavOptions = {
     //fontFamily: 'open-sans-bold'
   },
   headerBackTitleStyle: {
-   // fontFamily: 'open-sans'
+    // fontFamily: 'open-sans'
   },
   headerTintColor: Platform.OS === 'android' ? 'white' : Colors.primary
 };
@@ -70,7 +72,7 @@ const ProjectNavigator = createDrawerNavigator(
   {
     Home: HomeNavigator,
     Test: TestNavigator
-  
+
   },
   {
     contentOptions: {
@@ -87,7 +89,7 @@ const ProjectNavigator = createDrawerNavigator(
               color={Colors.primary}
               onPress={() => {
                 dispatch(authActions.logout());
-               props.navigation.navigate('Auth');
+                props.navigation.navigate('Auth');
               }}
             />
           </SafeAreaView>
@@ -97,34 +99,34 @@ const ProjectNavigator = createDrawerNavigator(
   }
 );
 
-const SignupNavigator = createStackNavigator(
-  {
-    Signup: SignupScreen
+// const SignupNavigator = createStackNavigator(
+//   {
+//     Signup: SignupScreen
 
-  },
-  {
-    defaultNavigationOptions: defaultNavOptions
-  }
-);
+//   }
+// );
 
-const AuthNavigator = createStackNavigator(
-  {
-    Auth: AuthScreen
+// const AuthNavigator = createStackNavigator(
+//   {
+//     Auth: AuthScreen
 
-  },
-  {
-    defaultNavigationOptions: defaultNavOptions
-  }
-);
+//   },
+//   {
+//     defaultNavigationOptions: defaultNavOptions
+//   }
+// );
+
+
 
 
 
 const MainNavigator = createSwitchNavigator({
+  Splash: SplashScreen,
   Startup: StartupScreen,
-  Auth: AuthNavigator,
+  Signup: SignupScreen,
+  Auth: AuthScreen,
   //Shop: ShopNavigator
   Project: ProjectNavigator,
-  Signup:SignupNavigator
 
 });
 

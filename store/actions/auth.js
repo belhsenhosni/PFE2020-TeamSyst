@@ -1,9 +1,12 @@
 import { AsyncStorage } from 'react-native';
+//import RNFetchBlob from 'ract-native-fetch-blob'
 
 // export const SIGNUP = 'SIGNUP';
 // export const LOGIN = 'LOGIN';
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const LOGOUT = 'LOGOUT';
+//var RNFetchBlob = require('react-native-fetch-blob');
+
 
 let timer;
 
@@ -14,12 +17,14 @@ export const authenticate = (userId, token, expiryTime) => {
   };
 };
 
-export const signup = (firstName,lastName,gender,email, password,number) => {
+export const signup = (firstName, lastName, email, password, numTel) => {
+
   return async dispatch => {
+    console.log(password);
     const response = await fetch(
       //'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA15f-yTvVTUjUSm4vS0v5CSEu_zxNmJnI',   
-        'http://192.168.1.152:3000/api/users/',   
-        {
+      'http://192.168.1.191:3000/api/sign-up',
+      {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -27,19 +32,18 @@ export const signup = (firstName,lastName,gender,email, password,number) => {
         body: JSON.stringify({
           firstName: firstName,
           lastName: lastName,
-          gender: gender,
           email: email,
           password: password,
-          number:number,
+          numTel: numTel,
           returnSecureToken: true
 
         })
       }
     );
-    
+
     if (!response.ok) {
       const errorResData = await response.json();
-      const errorId = errorResData.message;
+      const errorId = errorResData.msg;
       let message = 'Something went wrong!';
       //if (errorId === 'EMAIL_EXISTS') {
       //  message = 'This email exists already!';
@@ -53,24 +57,26 @@ export const signup = (firstName,lastName,gender,email, password,number) => {
       authenticate(
         resData.localId,
         resData.idToken,
-        parseInt(resData.expiresIn) * 1000 
+        parseInt(resData.expiresIn) * 1000
       )
     );
-     const expirationDate = new Date(
-       new Date().getTime() + parseInt(resData.expiresIn) * 1000 
-     );
+    const expirationDate = new Date(
+      new Date().getTime() + parseInt(resData.expiresIn) * 1000
+    );
     saveDataToStorage(resData.idToken, resData.localId, expirationDate);
-   // saveDataToStorage(resData.idToken, resData.localId);
+    // saveDataToStorage(resData.idToken, resData.localId);
 
   };
 };
 
 export const login = (email, password) => {
   //console.log("test");
-    //console.log(email+password);
+  //console.log(email+password);
+
   return async dispatch => {
+    //console.log("thty" + password);
     const response = await fetch(
-      'http://192.168.1.152:3000/api/users/login',
+      'http://192.168.1.191:3000/api/login',
       {
         method: 'POST',
         headers: {
@@ -86,7 +92,7 @@ export const login = (email, password) => {
 
     if (!response.ok) {
       const errorResData = await response.json();
-      const errorId = errorResData.message;
+      const errorId = errorResData.msg;
       let message = 'Something went wrong!';
       // if (errorId === 'EMAIL_NOT_FOUND') {
       //   message = 'This email could not be found!';
@@ -102,12 +108,12 @@ export const login = (email, password) => {
       authenticate(
         resData.localId,
         resData.idToken,
-        parseInt(resData.expiresIn) * 1000 
+        parseInt(resData.expiresIn) * 1000
       )
     );
-     const expirationDate = new Date(
-       new Date().getTime() + parseInt(resData.expiresIn) * 1000 
-     );
+    const expirationDate = new Date(
+      new Date().getTime() + parseInt(resData.expiresIn) * 1000
+    );
     saveDataToStorage(resData.idToken, resData.localId, expirationDate);
     //saveDataToStorage(resData.idToken, resData.localId);
 
@@ -151,6 +157,6 @@ const saveDataToStorage = (token, userId) => {
     JSON.stringify({
       token: token,
       userId: userId
-        })
+    })
   );
 };

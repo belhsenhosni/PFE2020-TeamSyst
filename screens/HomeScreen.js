@@ -7,7 +7,7 @@ import HeaderButton from '../components/HeaderButton';
 const HomeScreen = () => {
 return (
     <View>
-        <Text>Hello from HomeScreen</Text>
+        <Text>Hello from HomeScreen </Text>
     </View>
 );
 };
