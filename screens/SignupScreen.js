@@ -91,7 +91,7 @@ const SignupScreen = props => {
 
   useEffect(() => {
     if (error) {
-      Alert.alert('An error occured', error, [{ text: 'Okay' }]);
+      Alert.alert('An error occured', error, [{ text: 'Cancel' },{ text: 'Ok' }]);
     }
   }, [
     error
@@ -101,17 +101,17 @@ const SignupScreen = props => {
     setIsLoading(false);
 
     if(formState.inputValidities.firstName === false && formState.inputValidities.lastName === false && formState.inputValidities.email === false && formState.inputValidities.password === false && formState.inputValidities.numTel === false) {
-      Alert.alert('Validation!', "All fields Are Required");
+      Alert.alert('Validation!', "All fields Are Required", [{ text: 'Cancel' },{ text: 'Ok' }]);
     } else if (formState.inputValidities.firstName === false) {
-      Alert.alert('Validation!', "Please enter your firstName");
+      Alert.alert('Validation!', "Please enter your firstName", [{ text: 'Cancel' },{ text: 'Ok' }]);
     } else if (formState.inputValidities.lastName === false) {
-      Alert.alert('Validation!', "Please enter your lastName");
+      Alert.alert('Validation!', "Please enter your lastName", [{ text: 'Cancel' },{ text: 'Ok' }]);
     } else if (formState.inputValidities.email === false) {
-      Alert.alert('Validation!', "Please enter your email");
+      Alert.alert('Validation!', "Please enter your email", [{ text: 'Cancel' },{ text: 'Ok' }]);
     } else if (formState.inputValidities.password === false) {
-      Alert.alert('Validation!', "Please enter your password");
+      Alert.alert('Validation!', "Please enter your password", [{ text: 'Cancel' },{ text: 'Ok' }]);
     } else if (formState.inputValidities.numTel === false) {
-      Alert.alert('Validation!', "Please enter your Phone Number");
+      Alert.alert('Validation!', "Please enter your Phone Number", [{ text: 'Cancel' },{ text: 'Ok' }]);
     }
   
   }

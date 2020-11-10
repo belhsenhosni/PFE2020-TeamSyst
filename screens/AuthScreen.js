@@ -25,6 +25,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import { useTheme } from 'react-native-paper';
+import AlertView from '../components/AlertView';
 
 
 
@@ -77,7 +78,7 @@ const AuthScreen = props => {
 
   useEffect(() => {
     if (error) {
-      Alert.alert('An error occured', error, [{ text: 'Okay' }]);
+      Alert.alert('An error occured', error, [{ text: 'Cancel' },{ text: 'Ok' }]);
     }
   }, [
     error
@@ -87,11 +88,11 @@ const AuthScreen = props => {
     setIsLoading(false);
 
     if(formState.inputValidities.email === false && formState.inputValidities.password === false ) {
-      Alert.alert('Validation!', "Please enter your email and password");
+      Alert.alert('Validation!', "Please enter your email and password", [{ text: 'Cancel' },{ text: 'Ok' }]);
     } else if (formState.inputValidities.email === false) {
-      Alert.alert('Validation!', "Please enter your email");
+      Alert.alert('Validation!', "Please enter your email", [{ text: 'Cancel' },{ text: 'Ok' }]);
     } else if (formState.inputValidities.password === false) {
-      Alert.alert('Validation!', "Please enter your password");
+      Alert.alert('Validation!', "Please enter your password", [{ text: 'Cancel' },{ text: 'Ok' }]);
     }
   }
 
